@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>draw game</title>
+    <style>
+        canvas {
+            border:1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body onload="draw()">
+<canvas id="board" width="800" height="500">
+
+</canvas>
+<script>
+
+var c = document.getElementById("board");
+var ctx = c.getContext("2d");
+ctx.fillStyle = "#17202A";
+ctx.lineWidth = 3;
+var draw = function(){
+    document.onmousemove = function(e){
+        var x = e.pageX;
+        var y = e.pageY;
+        ctx.lineTo(x,y);
+        ctx.stroke();
+    };
+    document.ontouchmove = function (e) {
+        var x = e.touches[0].screenX;
+        var y = e.touches[0].screenY;
+        ctx.lineTo(x,y);
+        ctx.stroke();
+    }
+};
+
+
+document.onkeydown = function (e) {
+    if (e.keyCode === 66){
+        ctx.strokeStyle = "#0000FF";
+        ctx.beginPath();
+    }
+    if (e.keyCode === 82){
+        ctx.strokeStyle = "#FF0000";
+        ctx.beginPath();
+    }
+    if (e.keyCode === 89){
+        ctx.strokeStyle = "#FFFF00";
+        ctx.beginPath();
+    }
+    if (e.keyCode === 71){
+        ctx.strokeStyle = "#008000";
+        ctx.beginPath();
+    }
+    if (e.keyCode === 38){
+        ctx.lineWidth = ctx.lineWidth + 1;
+        ctx.beginPath();
+    }
+    if (e.keyCode === 40){
+        if (ctx.lineWidth < 1){
+            ctx.lineWidth = 1
+        }
+        ctx.lineWidth = ctx.lineWidth - 1;
+        ctx.beginPath();
+    }
+    if (e.keyCode === 32){
+        ctx.clearRect(0,0,800,500);
+        ctx.beginPath();
+    }
+}
+
+
+</script>
+</body>
+</html>
